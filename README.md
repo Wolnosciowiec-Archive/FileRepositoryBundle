@@ -1,3 +1,8 @@
+FileRepositoryBundle
+====================
+
+Symfony bundle that provides a files repository interface with error handling
+
 Configuration
 =============
 
