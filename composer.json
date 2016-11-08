@@ -1,0 +1,28 @@
+{
+  "name":        "wolnosciowiec/FileRepositoryBundle",
+  "description": "Provides an interface to connect with `wolnosciowiec/image-repository` server",
+  "license":     "LGPLv3",
+  "type":        "library",
+
+  "require": {
+    "php": ">=7.0",
+    "wolnosciowiec/comrade-reader": "dev-master"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": ">=5.4",
+    "codeclimate/php-test-reporter": "dev-master",
+    "doctrine/annotations": ">=1.3",
+    "symfony/framework-bundle": ">=2.8",
+    "symfony/validator": ">=2.8",
+    "symfony/twig-bundle": ">=2.8",
+    "symfony/form": ">=2.8",
+    "wolnosciowiec/wolnosciowiec-image-repository": "dev-master"
+  },
+
+  "autoload": {
+    "psr-4": {
+        "Wolnosciowiec\\FileRepositoryBundle\\": ""
+    }
+  }
+}

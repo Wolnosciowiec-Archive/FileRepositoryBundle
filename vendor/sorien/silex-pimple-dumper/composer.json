@@ -1,0 +1,30 @@
+{
+    "name": "sorien/silex-pimple-dumper",
+    "description": "Pimple File Dumper - Helper Provider for Silex Idea Plugin",
+    "keywords": [
+        "silex",
+        "dumper",
+        "idea",
+        "plugin"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stanislav Turza",
+            "role": "Developer"
+        }
+    ],
+    "require-dev": {
+        "silex/silex": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sorien\\Provider\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }        
+}

@@ -1,0 +1,15 @@
+services:
+    # a wrapper class that injects dependencies
+    wolnosciowiec.file_repository.comrade:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\Comrade\ComradeReader
+
+    wolnosciowiec.file_repository.registry:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
+        arguments:
+            comrade: "@wolnosciowiec.file_repository.comrade"
+
+    wolnosciowiec.file_repository.uploader:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
+        arguments:
+            comrade: "@wolnosciowiec.file_repository.comrade"
+
