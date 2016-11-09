@@ -7,9 +7,8 @@ before_script:
   - composer install
   - composer dump-autoload -o
   - composer require satooshi/php-coveralls:dev-master
-  - mkdir -p ./tests/logs
 
-script: ./bin/phpunit.sh --coverage-clover ./tests/logs/clover.xml
+script: ./bin/phpunit.sh --coverage-clover clover.xml
 
 after_success:
-  - php vendor/bin/coveralls -v
+  - php vendor/bin/coveralls -v --coverage_clover clover.xml
