@@ -13,3 +13,15 @@ services:
         arguments:
             comrade: "@wolnosciowiec.file_repository.comrade"
 
+    # repository of local cached resources
+    wolnosciowiec.file_repository.repository.cached_resource:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - Wolnosciowiec\FileRepositoryBundle\Model\Entity\CachedResource
+
+    # registry for cached resources
+    wolnosciowiec.file_repository.local_resource_registry:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\Manager\LocalResourceRegistry
+        arguments:
+            repository: "@wolnosciowiec.file_repository.repository.cached_resource"
