@@ -2,6 +2,7 @@ FileRepositoryBundle
 ====================
 
 [![Build Status](https://travis-ci.org/Wolnosciowiec/FileRepositoryBundle.svg?branch=master)](https://travis-ci.org/Wolnosciowiec/FileRepositoryBundle)
+[![Coverage Status](https://coveralls.io/repos/github/Wolnosciowiec/FileRepositoryBundle/badge.svg?branch=master)](https://coveralls.io/github/Wolnosciowiec/FileRepositoryBundle?branch=master)
 
 A Symfony bundle that provides a files repository interface with error handling.
 Files repository allows to store static files on a cheapest storage (e.g. from $1/mo).
