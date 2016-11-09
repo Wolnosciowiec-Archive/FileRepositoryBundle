@@ -4,3 +4,6 @@ php:
   - nightly
 before_script: composer install && composer dump-autoload -o
 script: ./bin/phpunit.sh
+
+after_success:
+  - coveralls
