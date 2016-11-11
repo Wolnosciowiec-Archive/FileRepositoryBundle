@@ -11,6 +11,6 @@ php -S 0.0.0.0:8005 ./index_dev.php &
 cd ../../../../
 
 composer dump-autoload -o
-./vendor/bin/phpunit
+./vendor/bin/phpunit "$@"
 
 killall php

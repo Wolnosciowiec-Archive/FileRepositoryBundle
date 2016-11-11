@@ -18,6 +18,13 @@ Wolnosciowiec\FileRepositoryBundle\Model\Entity\CachedResource:
             length: 128
             unique: true
             nullable: false
+        lastChecked:
+            type: datetime
+            column: last_checked
+        cachedUrl:
+            type: string
+            length: 128
+            column: cached_url
         active:
             type: boolean
             options:

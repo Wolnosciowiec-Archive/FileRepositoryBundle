@@ -26,6 +26,21 @@ class CachedResource
     private $active = false;
 
     /**
+     * @var \DateTime $lastChecked
+     */
+    private $lastChecked;
+
+    /**
+     * @var string $cachedUrl
+     */
+    private $cachedUrl;
+
+    public function __construct()
+    {
+        $this->lastChecked = new \DateTime('now');
+    }
+
+    /**
      * @param string $id
      * @return $this
      */
@@ -33,6 +48,14 @@ class CachedResource
     {
         $this->id = $id;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCachedUrl()
+    {
+        return $this->cachedUrl;
     }
 
     /**
@@ -77,5 +100,33 @@ class CachedResource
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param \DateTime $lastChecked
+     * @return CachedResource
+     */
+    public function setLastChecked($lastChecked)
+    {
+        $this->lastChecked = $lastChecked;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastChecked()
+    {
+        return $this->lastChecked;
+    }
+
+    /**
+     * @param string $cachedUrl
+     * @return CachedResource
+     */
+    public function setCachedUrl($cachedUrl)
+    {
+        $this->cachedUrl = $cachedUrl;
+        return $this;
     }
 }

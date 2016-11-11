@@ -33,16 +33,18 @@ class LocalResourceRegistry
 
     /**
      * @param string $url URL or file name
+     * @param string $repositoryFileUrl A public URL that allows to view the file from the repository
      * @param bool   $isActive
      *
      * @throws ForeignKeyConstraintViolationException
      * @return CachedResource
      */
-    public function addResource($url, $isActive = false)
+    public function addResource($url, $repositoryFileUrl, $isActive = true)
     {
         $resource = new CachedResource();
         $resource->setUrl($url);
         $resource->setActive($isActive);
+        $resource->setCachedUrl($repositoryFileUrl);
 
         try {
             $this->repository->persist($resource);

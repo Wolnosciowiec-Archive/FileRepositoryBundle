@@ -25,6 +25,23 @@ class FileRegistry extends AbstractFileRepositoryService
     }
 
     /**
+     * @param string $fileName
+     * @return string
+     */
+    public function getFileURL($fileName)
+    {
+        $response = $this->getComrade()->post('/repository/image/exists', [
+            'file_name' => $fileName,
+        ])->getResponse();
+
+        if ($response['success'] === true) {
+            return $response['data']['url'];
+        }
+
+        return '';
+    }
+
+    /**
      * @param string $fileName File name or url address
      * @return bool
      */

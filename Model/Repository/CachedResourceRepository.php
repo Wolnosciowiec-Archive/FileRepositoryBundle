@@ -24,4 +24,18 @@ class CachedResourceRepository extends EntityRepository
     {
         $this->getEntityManager()->flush($resource);
     }
+
+    /**
+     * @param int $maxDaysCount
+     * @return CachedResource[]
+     */
+    public function findResourcesToVerify($maxDaysCount = 7)
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->where('r.active = true');
+        $qb->andWhere('DATE_DIFF(CURRENT_DATE(), r.lastChecked) >= :max_days');
+        $qb->setParameter('max_days', $maxDaysCount);
+
+        return $qb->getQuery()->getResult();
+    }
 }
