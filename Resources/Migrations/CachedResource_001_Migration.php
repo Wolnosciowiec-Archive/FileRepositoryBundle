@@ -17,7 +17,7 @@ class CachedResource_001_Migration
             ->setNotnull(true);
 
         $table->addColumn('url', 'string')
-            ->setLength(128)
+            ->setLength(254)
             ->setNotnull(false);
 
         $table->addColumn('active', 'boolean')

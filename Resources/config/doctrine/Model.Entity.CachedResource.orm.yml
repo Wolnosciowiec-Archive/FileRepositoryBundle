@@ -15,7 +15,7 @@ Wolnosciowiec\FileRepositoryBundle\Model\Entity\CachedResource:
     fields:
         url:
             type: string
-            length: 128
+            length: 254
             unique: true
             nullable: false
         lastChecked:

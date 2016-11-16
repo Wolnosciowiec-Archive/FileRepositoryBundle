@@ -24,8 +24,8 @@ class FileUploader extends AbstractFileRepositoryService
             'file_name' => $url,
         ], 0)->getResponse();
 
-        if ($response['code'] !== 200) {
-            throw new UploadFailureException('File upload by url failed with message: "' . $response['message']);
+        if (!in_array($response['code'], [200, 301], true)) {
+            throw new UploadFailureException('File upload by url failed, response: "' . json_encode($response) . '"');
         }
 
         return $response['url'];

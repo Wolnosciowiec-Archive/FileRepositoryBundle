@@ -25,3 +25,7 @@ services:
         class: Wolnosciowiec\FileRepositoryBundle\Service\Manager\LocalResourceRegistry
         arguments:
             repository: "@wolnosciowiec.file_repository.repository.cached_resource"
+
+    # serializes cached resources into data understandable by
+    wolnosciowiec.file_repository.serializer.rmv:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\RMVSerializer

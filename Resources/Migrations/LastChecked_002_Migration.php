@@ -20,7 +20,7 @@ class LastChecked_002_Migration
 
         if (!$table->hasColumn('cached_url')) {
             $table->addColumn('cached_url', 'string')
-                ->setLength(128)
+                ->setLength(254)
                 ->setNotnull(false);
         }
     }

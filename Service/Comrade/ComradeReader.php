@@ -48,7 +48,7 @@ class ComradeReader extends \ComradeReader\Service\ComradeReader
     }
 
     /**
-     * @param strin $token
+     * @param string $token
      */
     public function setToken($token)
     {

@@ -41,23 +41,19 @@ class LocalResourceRegistry
      */
     public function addResource($url, $repositoryFileUrl, $isActive = true)
     {
+        $resource = $this->findResource($url);
+
+        if ($resource instanceof CachedResource) {
+            return $resource;
+        }
+
         $resource = new CachedResource();
         $resource->setUrl($url);
         $resource->setActive($isActive);
         $resource->setCachedUrl($repositoryFileUrl);
 
-        try {
-            $this->repository->persist($resource);
-            $this->repository->flush($resource);
-        }
-        catch (ForeignKeyConstraintViolationException $e) {
-
-            if (strpos($e->getMessage(), 'url') !== false) {
-                return $this->findResource($url);
-            }
-
-            throw $e;
-        }
+        $this->repository->persist($resource);
+        $this->repository->flush($resource);
 
         return $resource;
     }
