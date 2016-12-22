@@ -11,6 +11,10 @@ class CachedResource_001_Migration
 {
     public function up(Schema $schema)
     {
+        if ($schema->hasTable('fr_bundle_cached_resource')) {
+            return;
+        }
+
         $table = $schema->createTable('fr_bundle_cached_resource');
         $table->addColumn('id', 'string')
             ->setLength(36)
@@ -31,6 +35,10 @@ class CachedResource_001_Migration
 
     public function down(Schema $schema)
     {
+        if (!$schema->hasTable('fr_bundle_cached_resource')) {
+            return;
+        }
+
         $schema->dropTable('fr_bundle_cached_resource');
     }
 }
