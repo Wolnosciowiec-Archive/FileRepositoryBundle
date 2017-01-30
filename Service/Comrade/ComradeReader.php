@@ -25,33 +25,41 @@ class ComradeReader extends \ComradeReader\Service\ComradeReader
 
     /**
      * @param CacheProvider $provider
+     * @return $this
      */
     public function setCache(CacheProvider $provider)
     {
         $this->cache = $provider;
+        return $this;
     }
 
     /**
      * @param SerializerInterface $serializer
+     * @return $this
      */
     public function setSerializer(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;
+        return $this;
     }
 
     /**
      * @param string $url
+     * @return $this
      */
     public function setUrl($url)
     {
         $this->url = $url;
+        return $this;
     }
 
     /**
      * @param string $token
+     * @return $this
      */
     public function setToken($token)
     {
         $this->secretToken = $token;
+        return $this;
     }
 }
