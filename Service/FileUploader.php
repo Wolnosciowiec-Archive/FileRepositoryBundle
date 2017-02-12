@@ -27,8 +27,6 @@ class FileUploader extends BaseHttpServiceClient
             'tags'    => $tags,
         ]));
 
-        $response = json_decode($response, true);
-
         if (!in_array($response['code'], [200, 301], true)) {
             throw new UploadFailureException('File upload by url failed, response: "' . json_encode($response) . '"');
         }

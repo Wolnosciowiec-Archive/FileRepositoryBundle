@@ -1,6 +1,8 @@
 <?php
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service\Http;
+use Psr\Http\Message\ResponseInterface;
+use Wolnosciowiec\FileRepositoryBundle\Exception\FileRepositoryRequestFailureException;
 
 /**
  * @package Wolnosciowiec\FileRepositoryBundle\Service\Http
@@ -64,31 +66,49 @@ class Client
      * @param string $relativeUrl
      * @param array $parameters
      *
-     * @return string
+     * @return array
      */
-    public function post(string $relativeUrl, array $parameters): string
+    public function post(string $relativeUrl, array $parameters): array
     {
-        return $this->client->request('POST', $this->baseUrl . $relativeUrl, [
+        return $this->processBody($this->client->request('POST', $this->baseUrl . $relativeUrl, [
             'query' => [
                 '_token' => $this->token,
             ],
             'form_params' => $parameters
-        ])->getBody()->read(99999);
+        ]));
     }
 
     /**
      * @param string $relativeUrl
      * @param string $body
      *
-     * @return string
+     * @return array
      */
-    public function postJson(string $relativeUrl, string $body): string
+    public function postJson(string $relativeUrl, string $body): array
     {
-        return $this->client->request('POST', $this->baseUrl . $relativeUrl, [
+        return $this->processBody($this->client->request('POST', $this->baseUrl . $relativeUrl, [
             'query' => [
                 '_token' => $this->token,
             ],
             'body'  => $body,
-        ])->getBody()->read(99999);
+        ]));
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @throws FileRepositoryRequestFailureException
+     * @return array
+     */
+    private function processBody(ResponseInterface $response): array
+    {
+        $text = $response->getBody()->read(99999);
+        $decoded = \GuzzleHttp\json_decode($text, true);
+
+        if (isset($decoded['success']) && !$decoded['success']) {
+            throw (new FileRepositoryRequestFailureException('Request failed, response: ' . $text))
+                ->setResponse($decoded);
+        }
+
+        return $decoded;
     }
 }

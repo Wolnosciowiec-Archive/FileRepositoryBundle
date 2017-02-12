@@ -6,12 +6,17 @@ services:
     wolnosciowiec.file_repository.registry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
         arguments:
-            comrade: "@wolnosciowiec.file_repository.client"
+            client: "@wolnosciowiec.file_repository.client"
 
     wolnosciowiec.file_repository.uploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
         arguments:
-            comrade: "@wolnosciowiec.file_repository.client"
+            client: "@wolnosciowiec.file_repository.client"
+            
+    wolnosciowiec.file_repository.token_manager:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\TokenManager
+        arguments:
+            client: "@wolnosciowiec.file_repository.client"
 
     # repository of local cached resources
     wolnosciowiec.file_repository.repository.cached_resource:

@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service;
+use Wolnosciowiec\FileRepositoryBundle\Exception\FileRepositoryRequestFailureException;
 
 /**
  * Performs checks if file exists, gets statistics
@@ -17,13 +18,16 @@ class FileRegistry extends BaseHttpServiceClient
      */
     public function fileExists($fileName)
     {
-        $response = $this->getClient()->post('/repository/image/exists',[
-            'file_name' => $fileName,
-        ]);
+        try {
+            $response = $this->getClient()->post('/repository/image/exists',[
+                'file_name' => $fileName,
+            ]);
 
-        $decoded = json_decode($response, true);
+        } catch (FileRepositoryRequestFailureException $e) {
+            return false;
+        }
 
-        return $decoded['success'] === true;
+        return $response['success'] === true;
     }
 
     /**
@@ -36,10 +40,8 @@ class FileRegistry extends BaseHttpServiceClient
             'file_name' => $fileName,
         ]);
 
-        $decoded = json_decode($response, true);
-
-        if ($decoded['success'] === true) {
-            return $decoded['data']['url'];
+        if ($response['success'] === true) {
+            return $response['data']['url'];
         }
 
         return '';
@@ -55,8 +57,6 @@ class FileRegistry extends BaseHttpServiceClient
             'file_name' => $fileName,
         ]);
 
-        $decoded = json_decode($response, true);
-
-        return $decoded['success'] === true;
+        return $response['success'] === true;
     }
 }

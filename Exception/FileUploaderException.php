@@ -7,4 +7,4 @@ namespace Wolnosciowiec\FileRepositoryBundle\Exception;
  *
  * @package Wolnosciowiec\FileRepositoryBundle\Exception
  */
-class FileUploaderException extends \Exception { };
+class FileUploaderException extends FileRepositoryRequestFailureException { };
