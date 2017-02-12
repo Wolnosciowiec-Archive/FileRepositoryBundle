@@ -23,9 +23,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('cache_class')
-                ->isRequired()
-                ->end()
             ->scalarNode('url')
                 ->isRequired()
                 ->end()

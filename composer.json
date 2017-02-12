@@ -6,17 +6,18 @@
 
   "require": {
     "php": ">=7.0",
-    "wolnosciowiec/comrade-reader": "dev-master"
+    "guzzlehttp/guzzle": "^6.2",
+    "doctrine/orm": "*"
   },
 
   "require-dev": {
-    "phpunit/phpunit": ">=5.4",
+    "phpunit/phpunit": "^5.4",
     "doctrine/annotations": ">=1.3",
     "symfony/framework-bundle": ">=2.8",
     "symfony/validator": ">=2.8",
     "symfony/twig-bundle": ">=2.8",
     "symfony/form": ">=2.8",
-    "wolnosciowiec/wolnosciowiec-image-repository": "dev-master"
+    "symfony/var-dumper": "^3.2"
   },
 
   "autoload": {

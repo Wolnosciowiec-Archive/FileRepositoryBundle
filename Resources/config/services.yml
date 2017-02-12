@@ -1,17 +1,17 @@
 services:
     # a wrapper class that injects dependencies
-    wolnosciowiec.file_repository.comrade:
-        class: Wolnosciowiec\FileRepositoryBundle\Service\Comrade\ComradeReader
+    wolnosciowiec.file_repository.client:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\Http\Client
 
     wolnosciowiec.file_repository.registry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
         arguments:
-            comrade: "@wolnosciowiec.file_repository.comrade"
+            comrade: "@wolnosciowiec.file_repository.client"
 
     wolnosciowiec.file_repository.uploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
         arguments:
-            comrade: "@wolnosciowiec.file_repository.comrade"
+            comrade: "@wolnosciowiec.file_repository.client"
 
     # repository of local cached resources
     wolnosciowiec.file_repository.repository.cached_resource:

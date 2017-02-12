@@ -1,7 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service;
-use ComradeReader\Collection\Parameters\ParametersBag;
 
 /**
  * Performs checks if file exists, gets statistics
@@ -10,7 +9,7 @@ use ComradeReader\Collection\Parameters\ParametersBag;
  *
  * @package Wolnosciowiec\FileRepositoryBundle\Service
  */
-class FileRegistry extends AbstractFileRepositoryService
+class FileRegistry extends BaseHttpServiceClient
 {
     /**
      * @param string $fileName File name or url address
@@ -18,12 +17,13 @@ class FileRegistry extends AbstractFileRepositoryService
      */
     public function fileExists($fileName)
     {
-        $response = $this->getComrade()->post(
-            '/repository/image/exists',
-            (new ParametersBag())->set(['file_name' => $fileName])
-        );
+        $response = $this->getClient()->post('/repository/image/exists',[
+            'file_name' => $fileName,
+        ]);
 
-        return $response->getDecodedResponse()['success'] === true;
+        $decoded = json_decode($response, true);
+
+        return $decoded['success'] === true;
     }
 
     /**
@@ -32,13 +32,14 @@ class FileRegistry extends AbstractFileRepositoryService
      */
     public function getFileURL($fileName)
     {
-        $response = $this->getComrade()->post(
-            '/repository/image/exists',
-            (new ParametersBag())->set(['file_name' => $fileName])
-        )->getDecodedResponse();
+        $response = $this->getClient()->post('/repository/image/exists', [
+            'file_name' => $fileName,
+        ]);
 
-        if ($response['success'] === true) {
-            return $response['data']['url'];
+        $decoded = json_decode($response, true);
+
+        if ($decoded['success'] === true) {
+            return $decoded['data']['url'];
         }
 
         return '';
@@ -50,11 +51,12 @@ class FileRegistry extends AbstractFileRepositoryService
      */
     public function deleteFile($fileName)
     {
-        $response = $this->getComrade()->post(
-            '/repository/image/delete',
-            (new ParametersBag())->set(['file_name' => $fileName])
-        );
+        $response = $this->getClient()->post('/repository/image/delete', [
+            'file_name' => $fileName,
+        ]);
 
-        return $response->getDecodedResponse()['success'] === true;
+        $decoded = json_decode($response, true);
+
+        return $decoded['success'] === true;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service;
 
-use ComradeReader\Collection\Parameters\ParametersBag;
+use ComradeReader\Collection\Parameters\JsonPayload;
 use Wolnosciowiec\FileRepositoryBundle\Exception\UploadFailureException;
 
 /**
@@ -11,20 +11,23 @@ use Wolnosciowiec\FileRepositoryBundle\Exception\UploadFailureException;
  *
  * @package Wolnosciowiec\FileRepositoryBundle\Service
  */
-class FileUploader extends AbstractFileRepositoryService
+class FileUploader extends BaseHttpServiceClient
 {
     /**
      * @param string $url
+     * @param array  $tags
+     *
      * @throws UploadFailureException
      * @return string
      */
-    public function uploadFromUrl($url)
+    public function uploadFromUrl(string $url, array $tags = [])
     {
-        $response = $this->getComrade()->post(
-            '/repository/image/add-by-url',
-            (new ParametersBag())->set(['file_name' => $url]),
-            0
-        )->getDecodedResponse();
+        $response = $this->getClient()->postJson('/repository/image/add-by-url', json_encode([
+            'fileUrl' => $url,
+            'tags'    => $tags,
+        ]));
+
+        $response = json_decode($response, true);
 
         if (!in_array($response['code'], [200, 301], true)) {
             throw new UploadFailureException('File upload by url failed, response: "' . json_encode($response) . '"');

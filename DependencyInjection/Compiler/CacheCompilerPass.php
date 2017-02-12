@@ -20,22 +20,10 @@ class CacheCompilerPass implements CompilerPassInterface
             throw new InvalidConfigurationException('Missing file_repository.url, file_repository.token or file_repository.cache_class configuration');
         }
 
-        // inject the cache service into the Comrade Reader
-        $comrade = $container->getDefinition('wolnosciowiec.file_repository.comrade');
+        // inject the cache service into the HTTP client
+        $httpClient = $container->getDefinition('wolnosciowiec.file_repository.client');
 
-        $comrade->addMethodCall('setUrl',        [$config[0]['url']]);
-        $comrade->addMethodCall('setToken',      [$config[0]['token']]);
-
-        // serializer
-        $serializer = new Definition(Serializer::class, []);
-        $serializer->setPublic(false);
-        $container->setDefinition('wolnosciowiec.file_repository.serializer', $serializer);
-        $comrade->addMethodCall('setSerializer', array($serializer));
-
-        // cache
-        $cache = new Definition($config[0]['cache_class'], []);
-        $cache->setPublic(false);
-        $container->setDefinition('wolnosciowiec.file_repository.cache', $cache);
-        $comrade->addMethodCall('setCache', array($cache));
+        $httpClient->addMethodCall('setUrl',        [$config[0]['url']]);
+        $httpClient->addMethodCall('setToken',      [$config[0]['token']]);
     }
 }
