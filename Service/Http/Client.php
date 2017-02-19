@@ -1,6 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service\Http;
+
 use Psr\Http\Message\ResponseInterface;
 use Wolnosciowiec\FileRepositoryBundle\Exception\FileRepositoryRequestFailureException;
 
@@ -90,7 +91,10 @@ class Client
             'query' => [
                 '_token' => $this->token,
             ],
-            'body'  => $body,
+            'headers' => [
+                'Cache-Control' => 'no-cache',
+            ],
+            'json'  => \GuzzleHttp\json_decode($body, true),
         ]));
     }
 
@@ -110,5 +114,13 @@ class Client
         }
 
         return $decoded;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
     }
 }

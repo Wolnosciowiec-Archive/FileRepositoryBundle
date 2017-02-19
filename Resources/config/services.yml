@@ -7,6 +7,7 @@ services:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
         arguments:
             client: "@wolnosciowiec.file_repository.client"
+            serializer: "@serializer"
 
     wolnosciowiec.file_repository.uploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
@@ -15,6 +16,11 @@ services:
             
     wolnosciowiec.file_repository.token_manager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\TokenManager
+        arguments:
+            client: "@wolnosciowiec.file_repository.client"
+
+    wolnosciowiec.file_repository.user_upload_manager:
+        class: Wolnosciowiec\FileRepositoryBundle\Service\UserUploadManager
         arguments:
             client: "@wolnosciowiec.file_repository.client"
 

@@ -12,6 +12,11 @@ so the main application could take only the minimum of sending files, and removi
 Bundle also includes a local registry that was created to mark hotlinked resources as not available anymore
 so it could be served from the repository only when expired on remote server.
 
+### Requirements:
+
+- Symfony
+- JMS Serializer
+
 Setup
 =====
 

@@ -2,7 +2,6 @@
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service;
 
-use ComradeReader\Collection\Parameters\JsonPayload;
 use Wolnosciowiec\FileRepositoryBundle\Exception\UploadFailureException;
 
 /**
