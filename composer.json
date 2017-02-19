@@ -1,5 +1,5 @@
 {
-  "name":        "wolnosciowiec/FileRepositoryBundle",
+  "name":        "wolnosciowiec/file-repository-bundle",
   "description": "Provides an interface to connect with `wolnosciowiec/image-repository` server",
   "license":     "LGPLv3",
   "type":        "library",

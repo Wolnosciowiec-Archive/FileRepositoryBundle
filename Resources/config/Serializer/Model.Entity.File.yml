@@ -1,0 +1,21 @@
+Wolnosciowiec\FileRepositoryBundle\Model\Entity\File:
+     exclusion_policy: none
+
+     properties:
+        name:
+            type: string
+
+        contentHash:
+            type: string
+
+        mimeType:
+            type: string
+
+        tags:
+            type: array
+
+        dateAdded:
+            type: datetime
+
+        url:
+            type: string
