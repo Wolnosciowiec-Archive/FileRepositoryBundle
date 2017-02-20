@@ -79,15 +79,17 @@ class FileRegistry extends BaseHttpServiceClient
      * @param array $tags
      * @param int   $page
      * @param int   $perPage
+     * @param string $searchQuery
      *
      * @return PaginatedResults
      */
-    public function findBy(array $tags, int $page = 1, int $perPage = 50): PaginatedResults
+    public function findBy(array $tags, int $page = 1, int $perPage = 50, string $searchQuery = ''): PaginatedResults
     {
         $response = $this->getClient()->postJson('/repository/search/query', json_encode([
-            'tags'   => $tags,
-            'offset' => ($perPage * ($page - 1)),
-            'limit'  => $perPage,
+            'tags'        => $tags,
+            'offset'      => ($perPage * ($page - 1)),
+            'limit'       => $perPage,
+            'searchQuery' => $searchQuery,
         ]));
 
         if ($response['success'] === false && !isset($response['results'])) {
