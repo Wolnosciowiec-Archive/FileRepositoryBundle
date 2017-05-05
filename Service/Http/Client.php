@@ -81,6 +81,22 @@ class Client
 
     /**
      * @param string $relativeUrl
+     * @param array $queryParameters
+     *
+     * @throws FileRepositoryRequestFailureException
+     * @return array
+     */
+    public function get(string $relativeUrl, array $queryParameters = []): array
+    {
+        return $this->processBody($this->client->request('GET', $this->baseUrl . $relativeUrl, [
+            'query' => array_merge([
+                '_token' => $this->token,
+            ], $queryParameters),
+        ]));
+    }
+
+    /**
+     * @param string $relativeUrl
      * @param string $body
      *
      * @return array
