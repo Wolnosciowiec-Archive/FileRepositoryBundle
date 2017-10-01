@@ -6,23 +6,23 @@ services:
     wolnosciowiec.file_repository.registry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
         arguments:
-            client: "@wolnosciowiec.file_repository.client"
-            serializer: "@serializer"
+            - "@wolnosciowiec.file_repository.client"
+            - "@serializer"
 
     wolnosciowiec.file_repository.uploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
         arguments:
-            client: "@wolnosciowiec.file_repository.client"
+            - "@wolnosciowiec.file_repository.client"
             
     wolnosciowiec.file_repository.token_manager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\TokenManager
         arguments:
-            client: "@wolnosciowiec.file_repository.client"
+            - "@wolnosciowiec.file_repository.client"
 
     wolnosciowiec.file_repository.user_upload_manager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\UserUploadManager
         arguments:
-            client: "@wolnosciowiec.file_repository.client"
+            - "@wolnosciowiec.file_repository.client"
 
     # repository of local cached resources
     wolnosciowiec.file_repository.repository.cached_resource:
@@ -35,7 +35,7 @@ services:
     wolnosciowiec.file_repository.local_resource_registry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\Manager\LocalResourceRegistry
         arguments:
-            repository: "@wolnosciowiec.file_repository.repository.cached_resource"
+            - "@wolnosciowiec.file_repository.repository.cached_resource"
 
     # serializes cached resources into data understandable by
     wolnosciowiec.file_repository.serializer.rmv:
