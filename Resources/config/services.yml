@@ -9,25 +9,25 @@ services:
         class: Wolnosciowiec\FileRepositoryBundle\Service\Http\Client
         public: true
 
-    wolnosciowiec.file_repository.registry:
+    Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
         public: true
         arguments:
             $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
 
-    wolnosciowiec.file_repository.uploader:
+    Wolnosciowiec\FileRepositoryBundle\Service\FileUploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
         public: true
         arguments:
             $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
             
-    wolnosciowiec.file_repository.token_manager:
+    Wolnosciowiec\FileRepositoryBundle\Service\TokenManager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\TokenManager
         public: true
         arguments:
             $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
 
-    wolnosciowiec.file_repository.user_upload_manager:
+    Wolnosciowiec\FileRepositoryBundle\Service\UserUploadManager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\UserUploadManager
         public: true
         arguments:

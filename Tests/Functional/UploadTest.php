@@ -2,6 +2,8 @@
 
 namespace Wolnosciowiec\FileRepositoryBundle\Tests\Functional;
 
+use Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry;
+use Wolnosciowiec\FileRepositoryBundle\Service\FileUploader;
 use Wolnosciowiec\FileRepositoryBundle\Tests\ContainerAwareTestCase;
 
 class UploadTest extends ContainerAwareTestCase
@@ -17,17 +19,17 @@ class UploadTest extends ContainerAwareTestCase
         $imageUrl = 'https://avatars0.githubusercontent.com/u/22785395';
 
         // add a file
-        $this->assertNotEmpty($this->container->get('wolnosciowiec.file_repository.uploader')
+        $this->assertNotEmpty($this->container->get(FileUploader::class)
             ->uploadFromUrl($imageUrl));
 
-        $this->assertTrue($this->container->get('wolnosciowiec.file_repository.registry')
+        $this->assertTrue($this->container->get(FileRegistry::class)
             ->fileExists($imageUrl));
 
         // delete a file
-        $this->container->get('wolnosciowiec.file_repository.registry')
+        $this->container->get(FileRegistry::class)
             ->deleteFile($imageUrl);
 
-        $this->assertFalse($this->container->get('wolnosciowiec.file_repository.registry')
+        $this->assertFalse($this->container->get(FileRegistry::class)
             ->fileExists($imageUrl));
     }
 }

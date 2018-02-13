@@ -3,6 +3,7 @@
 namespace Tests\Service;
 
 use Wolnosciowiec\FileRepositoryBundle\Exception\FileRepositoryRequestFailureException;
+use Wolnosciowiec\FileRepositoryBundle\Service\TokenManager;
 use Wolnosciowiec\FileRepositoryBundle\Tests\ContainerAwareTestCase;
 
 /**
@@ -15,7 +16,7 @@ class TokenManagerTest extends ContainerAwareTestCase
      */
     public function testRequestTemporaryToken()
     {
-        $token = $this->container->get('wolnosciowiec.file_repository.token_manager')->requestTemporaryToken(
+        $token = $this->container->get(TokenManager::class)->requestTemporaryToken(
             ['test_role1'],
             ['uploads']
         );
