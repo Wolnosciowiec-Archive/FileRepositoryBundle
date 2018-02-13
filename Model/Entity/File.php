@@ -41,7 +41,7 @@ class File implements \JsonSerializable
     {
         $this->setName($data['name'] ?? '');
         $this->setContentHash($data['content_hash'] ?? '');
-        $this->setDateAdded(!empty($data['date_added']) ? new \DateTime($data['date_added']) : new \DateTime());
+        $this->setDateAdded(!empty($data['date_added']['date']) ? new \DateTime($data['date_added']['date']) : new \DateTime());
         $this->setMimeType($data['mime_type'] ?? '');
         $this->setTags($data['tags'] ?? '');
         $this->setUrl($data['url'] ?? '');
