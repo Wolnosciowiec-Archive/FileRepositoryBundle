@@ -7,9 +7,6 @@
   "require": {
     "php": ">=7.0",
     "guzzlehttp/guzzle": "^6.2",
-    "doctrine/orm": "*",
-    "jms/serializer": "^1.5",
-    "jms/serializer-bundle": "^1.1",
     "wolnosciowiec/paginator-bundle": "~1.0"
   },
 
@@ -26,6 +23,9 @@
   "autoload": {
     "psr-4": {
         "Wolnosciowiec\\FileRepositoryBundle\\": ""
-    }
+    },
+    "files": [
+        "Tests/Fixtures/App/AppKernel.php"
+    ]
   }
 }

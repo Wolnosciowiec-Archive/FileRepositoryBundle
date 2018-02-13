@@ -5,7 +5,7 @@ namespace Wolnosciowiec\FileRepositoryBundle\Model\Entity;
 /**
  * @package Wolnosciowiec\FileRepositoryBundle
  */
-class File
+class File implements \JsonSerializable
 {
     /**
      * @var string $name
@@ -36,6 +36,16 @@ class File
      * @var string $url
      */
     private $url = '';
+
+    public function __construct(array $data)
+    {
+        $this->setName($data['name'] ?? '');
+        $this->setContentHash($data['content_hash'] ?? '');
+        $this->setDateAdded(!empty($data['date_added']) ? new \DateTime($data['date_added']) : new \DateTime());
+        $this->setMimeType($data['mime_type'] ?? '');
+        $this->setTags($data['tags'] ?? '');
+        $this->setUrl($data['url'] ?? '');
+    }
 
     /**
      * @return string
@@ -152,6 +162,18 @@ class File
     {
         $parts = explode('/', $this->getMimeType());
 
-        return strtolower($parts[0]) == 'image';
+        return strtolower($parts[0]) === 'image';
+    }
+    
+    public function jsonSerialize()
+    {
+        return [
+            'name' => $this->getName(),
+            'url'  => $this->getUrl(),
+            'tags' => $this->getTags(),
+            'dateAdded' => $this->getDateAdded(),
+            'contentHash' => $this->getContentHash(),
+            'mimeType'    => $this->getMimeType()
+        ];
     }
 }

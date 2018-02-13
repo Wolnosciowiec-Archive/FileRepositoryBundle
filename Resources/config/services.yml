@@ -1,42 +1,34 @@
 services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: true
+
     # a wrapper class that injects dependencies
-    wolnosciowiec.file_repository.client:
+    Wolnosciowiec\FileRepositoryBundle\Service\Http\Client:
         class: Wolnosciowiec\FileRepositoryBundle\Service\Http\Client
+        public: true
 
     wolnosciowiec.file_repository.registry:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileRegistry
+        public: true
         arguments:
-            - "@wolnosciowiec.file_repository.client"
-            - "@serializer"
+            $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
 
     wolnosciowiec.file_repository.uploader:
         class: Wolnosciowiec\FileRepositoryBundle\Service\FileUploader
+        public: true
         arguments:
-            - "@wolnosciowiec.file_repository.client"
+            $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
             
     wolnosciowiec.file_repository.token_manager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\TokenManager
+        public: true
         arguments:
-            - "@wolnosciowiec.file_repository.client"
+            $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'
 
     wolnosciowiec.file_repository.user_upload_manager:
         class: Wolnosciowiec\FileRepositoryBundle\Service\UserUploadManager
+        public: true
         arguments:
-            - "@wolnosciowiec.file_repository.client"
-
-    # repository of local cached resources
-    wolnosciowiec.file_repository.repository.cached_resource:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.default_entity_manager', getRepository]
-        arguments:
-            - Wolnosciowiec\FileRepositoryBundle\Model\Entity\CachedResource
-
-    # registry for cached resources
-    wolnosciowiec.file_repository.local_resource_registry:
-        class: Wolnosciowiec\FileRepositoryBundle\Service\Manager\LocalResourceRegistry
-        arguments:
-            - "@wolnosciowiec.file_repository.repository.cached_resource"
-
-    # serializes cached resources into data understandable by
-    wolnosciowiec.file_repository.serializer.rmv:
-        class: Wolnosciowiec\FileRepositoryBundle\Service\RMVSerializer
+            $client: '@Wolnosciowiec\FileRepositoryBundle\Service\Http\Client'

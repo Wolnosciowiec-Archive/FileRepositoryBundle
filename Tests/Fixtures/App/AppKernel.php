@@ -8,9 +8,9 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Wolnosciowiec\FileRepositoryBundle\FileRepositoryBundle(),
-            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle()
         ];
     }
 

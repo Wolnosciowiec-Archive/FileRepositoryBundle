@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 namespace Wolnosciowiec\FileRepositoryBundle\Service;
+
 use JMS\Serializer\SerializerInterface;
 use PaginatorBundle\Repository\PaginatedResults;
 use Wolnosciowiec\FileRepositoryBundle\Exception\FileRepositoryRequestFailureException;
@@ -16,17 +17,6 @@ use Wolnosciowiec\FileRepositoryBundle\Service\Http\Client;
  */
 class FileRegistry extends BaseHttpServiceClient
 {
-    /**
-     * @var SerializerInterface $serializer
-     */
-    private $serializer;
-
-    public function __construct(Client $client, SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
-        parent::__construct($client);
-    }
-
     /**
      * @param string $fileName File name or url address
      * @return bool
@@ -83,7 +73,7 @@ class FileRegistry extends BaseHttpServiceClient
      *
      * @return PaginatedResults
      */
-    public function findBy(array $tags, int $page = 1, int $perPage = 50, string $searchQuery = ''): PaginatedResults
+    public function findBy(array $tags, int $page = 1, int $perPage = 50, string $searchQuery = ''): ?PaginatedResults
     {
         $response = $this->getClient()->postJson('/repository/search/query', json_encode([
             'tags'        => $tags,
@@ -93,13 +83,23 @@ class FileRegistry extends BaseHttpServiceClient
         ]));
 
         if ($response['success'] === false && !isset($response['results'])) {
-            return [];
+            return null;
         }
 
         return new PaginatedResults(
-            $this->serializer->deserialize(json_encode($response['results']), 'ArrayCollection<' . File::class . '>', 'json'),
+            $this->createObjects($response['results']),
             $response['pages'],
             $page
+        );
+    }
+
+    private function createObjects(array $results): array
+    {
+        return array_map(
+            function (array $result) {
+                return new File($result);
+            },
+            $results
         );
     }
 }

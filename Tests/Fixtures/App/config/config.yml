@@ -1,9 +1,12 @@
+imports:
+  - { resource: "../../../../Resources/config/services.yml" }
+
 # Symfony Configuration
 framework:
     secret:             Hello
     router:             { resource: "%kernel.root_dir%/config/routing.yml" }
-    form:               true
-    csrf_protection:    true
+    form:               false
+    csrf_protection:    false
     assets:             false
     session:            ~
     default_locale:     en
