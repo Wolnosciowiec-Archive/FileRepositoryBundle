@@ -7,9 +7,5 @@ php:
 before_script:
   - composer install
   - composer dump-autoload -o
-  - composer require satooshi/php-coveralls:dev-master
 
-script: ./bin/phpunit.sh --coverage-clover ./clover.xml
-
-after_success:
-  - php vendor/bin/coveralls -v --coverage_clover ./clover.xml
+script: ./bin/phpunit.sh 
