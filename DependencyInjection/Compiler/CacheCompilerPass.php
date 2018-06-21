@@ -14,10 +14,8 @@ class CacheCompilerPass implements CompilerPassInterface
     {
         $config = $container->getExtensionConfig('file_repository');
 
-        if (!isset($config[0]['url'])
-            || !isset($config[0]['token'])
-            || !isset($config[0]['cache_class'])) {
-            throw new InvalidConfigurationException('Missing file_repository.url, file_repository.token or file_repository.cache_class configuration');
+        if (!isset($config[0]['url']) || !isset($config[0]['token'])) {
+            throw new InvalidConfigurationException('Missing file_repository.url, file_repository.token configuration');
         }
 
         $definition = new Definition(Client::class);
